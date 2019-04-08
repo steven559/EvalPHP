@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <style>
+ .button-englob{
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     padding:2%;
+
+}
+        .btn{
+            width: 6vw;
+            height: 3vw;
+            border-radius: 20px;
+            background-color: grey;
+            color: white;
+            cursor: pointer;
+        }
+
+    </style>
+    <h1 class="title">Article</h1>
+
+
+        <div>
+
+              <div class="imageComplete"> <img style="width:30vw;"  src="/image/{{ article.image }}"></div>
+
+
+
+                <div class="titleArticle">{{ article.title }}</div>
+
+
+
+                <div class="contentArticle">{{ article.content }}</div>
+
+
+
+                <div class="timeArticle">Publier le :{{ article.date|date('Y-m-d H:i')}}</div>
+              <h2>Poster un Commentaire</h2>
+            {% if app.user %}
+
+
+
+
+            {{ form_start(form) }}
+            {{ form_row(form) }}
+              <div class="button-englob"><button class="btn bouttondemerd">{{ button_label|default('Poste') }}</button></div>
+            {{ form_end(form) }}
+           {% endif %}
+            {% if  not app.user %}
+                <span style="color:black;">Pour poster un commentaire veullez enregistré un compte </span>
+                <a href="{{ path('register') }}">Inscription</a>
+            {% endif %}
+
+
+
+
+
+
+    {% for commentaires in article.commentaires %}
+        <div class="englobcomment">
+        <div class="commentaireUsername">Ecrit par: {{ commentaires.user.username }}</div>
+    <div class="commentaireContent">{{ commentaires.content | raw }}</div>
+
+        <div class="commentaireDate"> le:    {{ commentaires.date |date('d/m/Y à H:i') }}</div>
+            {% if is_granted('ROLE_ADMIN') %}
+            {{ include('article/com_delete.html.twig') }}
+            {% endif %}
+        </div>
+    {% endfor %}
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('article_index') }}">back to list</a>
+
+    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+
+
+    {{ include('article/_delete_form.html.twig') }}
+
+    {% endif %}
+        </body>
+{% endblock %}

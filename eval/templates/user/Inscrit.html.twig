@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Blog | Inscription{% endblock %}
+
+{% block body %}
+    <main>
+
+
+        <h1 style="color: cadetblue;" class="text-teal">Formulaire d'inscription</h1>
+        <form action="{{ path('register') }}" method="post">
+        <div class="formulaire">
+
+            <div class="form">{{ form_start(registrationForm) }}</div>
+            <div class="form">{{ form_row(registrationForm.username) }}</div>
+            <div class="form">{{ form_row(registrationForm.password) }}</div>
+
+
+            {{ form_end(registrationForm) }}
+
+            <button type="submit">Inscription</button>
+        </div>
+        </form>
+    </main>
+{% endblock %}

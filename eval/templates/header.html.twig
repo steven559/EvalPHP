@@ -1,0 +1,74 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="../App.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <meta content="width=devise-width, initial-scale=1" name="viewport"/>
+{% endblock %}
+{% block body %}
+
+    <nav role="navigation">
+
+        <div id="menuToggle">
+            <input type="checkbox" />
+            <span></span>
+            <span></span>
+            <span></span>
+
+            <ul id="menu">
+
+                <a href="{{ path('register') }}"><li>Inscription</li></a>
+                <a href="{{ path('login') }}"><li>Connexion</li></a>
+                <a href="{{ path('article_index') }}"><li>Accueil</li></a>
+                <a  href="/logout"><li>Deconnexion</li></a>
+
+            </ul>
+        </div>
+    </nav>
+
+    <nav class="navBar">
+
+        <div class="logo">BLOG</div>
+        {% if app.user %}
+        <div  class="surnom">bonjour:     {{ app.user.username }}</div>
+        {% endif %}
+        <div class="lien">
+            <a class="redirect" href="{{ path('register') }}">Inscription</a>
+            <a class="redirect" href="{{ path('login') }}">Connection</a>
+            <a class="redirect" href="{{ path('article_index') }}">Article</a>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="redirect" href="/logout">Deconnexion</a>
+            {% endif %}
+
+            <script>
+                /*var click = false;
+                var icone = document.getElementById('icone');
+                var menuHamb = document.getElementById('menuHamb');
+                icone.addEventListener('click', function () {
+
+
+                    document.getElementById('menuHamb').style.backgroundColor = 'cadetblue';
+                    document.getElementById('menuHamb').style.height = '35vh';
+                    document.getElementById('menuHamb').style.display = 'flex';
+                    menuHamb.style.flexDirection = 'column';
+                    menuHamb.style.alignItems = 'center';
+                    menuHamb.style.justifyContent = 'center';
+                    var redirect = document.querySelector('#redirect');
+                    redirect.style.display='block';
+                    document.querySelector('#redirect').
+                    redirect.style.color = 'white';
+                    redirect.style.paddingBottom = '3%';
+                    redirect.style.textAlign = 'center';
+                    redirect.style.marginBottom = 'black solid 1px';
+
+
+                })*/
+            </script>
+
+        </div>
+
+
+    </nav>
+
+
+{% endblock %}

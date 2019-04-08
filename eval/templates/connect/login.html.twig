@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1 class="connexion">Connexion</h1>
+    <form class="formulaireConnect" action="{{ path('login') }}" method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <label class="label" for="username"></label><input type="text" name="_username" id="username" placeholder="Username" >
+        <label class="label" for="password"></label><input type="password" name="_password" id="password" placeholder="Password">
+
+        <input type="submit">
+        
+        
+        
+        
+    </form>
+{% endblock %}
